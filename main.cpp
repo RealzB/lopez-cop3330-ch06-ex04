@@ -1,3 +1,12 @@
+/*
+ *  UCF COP3330 Fall 2021 Assignment 5 Solution
+ *  Copyright 2021 Brandon Lopez
+ *
+ *
+ * The code works but it requires an extra input before * it detects the use of a name twice
+ *
+ *
+ */
 #include "std_lib_facilities.h"
 class Name_value
 {
@@ -6,7 +15,7 @@ string name;
 int value;
 };
 vector<Name_value> n;
-// function to check if a name of student appears twice 
+// check if name appears twice 
 int twice()
 {
   int c=0;
@@ -16,21 +25,15 @@ int twice()
     {
       if(n[i].name==n[j].name)
       {
-        //c++;
-        //break;
         cout<<"ERROR!!! 2 names cannot be same."<<endl;
         return 1;
       }
     }
-    if(c!=0)
-    {
-      cout<<"ERROR!!! 2 names cannot be same."<<endl; return 1;
-    }     
+
   }
-  //cout<<"No duplicate students."<<endl;
   return 0;
 }
-// function to display all entries in vector n
+// displays the inputs
 void display()
 {
   for(int i=0;i<n.size();i++)
@@ -42,29 +45,30 @@ void display()
 // function to add an object of Name_value into n
 int add()
 {
-Name_value nv;
-cout<<"Enter the name and score."<<endl;
-cin>>nv.name>>nv.value;
-n.push_back(nv);
-if(twice())
-  {
-  display();
-  return 0;
-  }
-if(nv.name == "NoName" && nv.value == 0)
-  {
+  Name_value nv;
+  cout<<"Enter the name and score."<<endl;
+  cin>>nv.name>>nv.value;
+  n.push_back(nv);//add to vector
+
+  if(twice())//if a duplicate is detected it'll display and return 0 to end
+    {
     display();
     return 0;
-  }
+    }
+  if(nv.name == "NoName" && nv.value == 0)//if if NoName 0 is input it'll display and return 0 to end
+    {
+      display();
+      return 0;
+    }
 
-return 1;
+  return 1;//returns 1 to continue if it doesn't meet the other conditions
 }
-// function to add NoName0 at the last
 
-// start of main function
+
+
 int main()
 {
-  while(add());
+  while(add());//used to have more code in the main then realized I could shorten it to this
   
   return 0;
 }
